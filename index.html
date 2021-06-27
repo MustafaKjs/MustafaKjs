@@ -1,1 +1,72 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            position: absolute;
+            background-color: rgba(0, 0, 255, 0.308);
+            border: 1px solid blue;
+            width: 0;
+            height: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+   
+
+    <script>
+        var box;
+        var posX = 0 ;
+        var posY = 0 ;
+        var active = 0;
+
+
+        window.addEventListener("mousedown",getPosition);
+        window.addEventListener("mousemove",creatArea);
+        window.addEventListener("mouseup",deleteArea);
+
+        function getPosition(event){
+            posX = event.clientX;
+            posY = event.clientY;
+
+            box = document.createElement("div");
+            box.setAttribute("class","box");
+
+            box.style.top = posY + "px";
+            box.style.left = posX + "px";
+            document.getElementsByTagName("body")[0].appendChild(box);
+            active = 1;
+        }
+      
+
+
+        function creatArea(event){
+            if(active == 1){
+            box.style.display = "block";
+            var w = event.clientX - posX;
+            var h = event.clientY - posY;
+        
+            
+            box.style.width = w + "px";
+            box.style.height = h + "px";
+  
+            }
+           
+        }
+
+        function deleteArea(){
+            document.getElementsByTagName("body")[0].removeChild(box);
+            active = 1
+        }
+
+
+
+    </script>
+</body>
+</html>
